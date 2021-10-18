@@ -1,8 +1,12 @@
-import './styles/App.css';
+import './styles/style.css';
+import Details from './components/Details';
+import Display from './components/Display';
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex flex-wrap flex-jc-se">
+        <Details />
+        <Display />
     </div>
   );
 }

@@ -1,21 +1,15 @@
-import Box from './Box';
 import Heading from './Heading';
-import SectionHeading from './SectionHeading';
-import InputField from './InputField';
+import Input from './Input';
+import Section from './Section';
 
 function Details() {
     return (
-        <div className="border container flex flex-col flex-ai-c flex-jc-se">
-            <Heading text="Make-A-CV" />
-            <InputField label="Name"/>
-            <InputField label="Email"/>
-            <InputField label="Phone Number"/>
-            <SectionHeading text="Education"/>
-            <Box/>
-            <SectionHeading text="Work Experience"/>
-            <Box/>
-            <SectionHeading text="Extra-curricular"/>
-            <Box/>
+        <div className="container flex flex-col flex-ai-c flex-jc-se">
+            <Heading text="Make-a-CV"/>
+            <Input />
+            <Section heading="Education"/>
+            <Section heading="Work Experience"/>
+            <Section heading="Extra-curricular"/>
         </div>
     )
 }

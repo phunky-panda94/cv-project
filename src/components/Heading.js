@@ -1,8 +1,6 @@
 function Heading(props) {
     return (
-        <div className="heading">
-            {props.text}
-        </div>
+        <div className="heading">{props.text}</div>
     )
 }
 

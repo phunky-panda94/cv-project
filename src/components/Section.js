@@ -26,7 +26,7 @@ function Box() {
 
 function Entry(props) {
     return (
-        <div className="border entry flex flex-jc-sb">
+        <div className="border entry flex flex-jc-sb flex-ai-c">
             <span>{props.org}</span>
             <span>{props.title}</span>
             <span>{props.date}</span>

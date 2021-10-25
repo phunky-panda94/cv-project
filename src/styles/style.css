@@ -27,7 +27,7 @@
 }
 
 .form-div {
-    width: 80%;
+    width: 90%;
 }
 
 .form-div > button {
@@ -76,6 +76,10 @@
     width: 100%;
     position: fixed;
     z-index: 1;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 .input {

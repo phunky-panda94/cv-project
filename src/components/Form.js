@@ -3,12 +3,13 @@ import InputField from './InputField';
 function Form(props) {
     return (
         <div className="form flex flex-col flex-jc-c flex-ai-c">
+            <Close close={props.close}/>
             <form className="form-input flex flex-col flex-jc-sb flex-ai-c">
                 <FormHeading text={props.heading} />
                 <InputField type="text" label={props.org} />
-                <InputField type="text" label={props.title} />
-                <InputField type="date" label={props.startDate} />
-                <InputField type="date" label={props.endDate} />
+                <InputField type="text" label="Title" />
+                <InputField type="date" label="Start Date" />
+                <InputField type="date" label="End Date" />
                 <FormButtons />
             </form>
         </div>
@@ -19,6 +20,14 @@ function FormHeading(props) {
     return (
         <div className="form-div flex flex-jc-c">
             <div className="form-heading">{props.text}</div>
+        </div>
+    )
+}
+
+function Close(props) {
+    return (
+        <div className="form-div flex flex-jc-fe">
+            <span className="material-icons" onClick={props.close}>close</span>
         </div>
     )
 }

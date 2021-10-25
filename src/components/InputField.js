@@ -1,7 +1,7 @@
 function InputField(props) {
     return (
         <div className="field">
-            <label for={props.label}>
+            <label htmlFor={props.label}>
                 <span>{props.label}</span>
                 <input type={props.type} name={props.label}></input>
             </label>

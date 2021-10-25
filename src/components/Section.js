@@ -1,17 +1,19 @@
 function Section(props) {
     return (
         <div className="section flex flex-col flex-jc-sb">
-            <SectionHeading text={props.heading}/>
+            <SectionHeading add={props.add} text={props.heading} org={props.org}/>
             <Box />
         </div>
     )
 }
 
 function SectionHeading(props) {
+
+
     return (
         <div className="section-heading flex flex-jc-sb flex-ai-c">
             <h2>{props.text}</h2>
-            <span className="material-icons">add</span>
+            <span className="material-icons" onClick={() => props.add(props.text, props.org)}>add</span>
         </div>
     )
 }

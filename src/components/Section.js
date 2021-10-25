@@ -23,7 +23,7 @@ function Box(props) {
     return (
         <div className="box">
             {props.entries.map(entry => 
-                <Entry org={entry.org} title={entry.title} date={entry.date} />
+                <Entry key={entry.id} org={entry.org} title={entry.title} date={entry.date} />
             )}
         </div>
     )

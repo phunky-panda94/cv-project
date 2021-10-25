@@ -2,9 +2,23 @@ import InputField from './InputField';
 
 function Form(props) {
 
-    // TODO: add entry to local storage
-    function handleSubmit() {
+    
+    function handleSubmit(event) {
+        event.preventDefault();
 
+        let entry = {
+            id: String(Date.now()),
+            org: event.target.elements[props.org].value,
+            title: event.target.elements['Title'].value,
+            date: `${event.target.elements['Start Date'].value} - ${event.target.elements['End Date'].value}`
+        }
+
+        // TODO: add entry to local storage
+        console.log(entry);
+
+        props.close();
+        event.target.reset();
+        
     }
 
     return (

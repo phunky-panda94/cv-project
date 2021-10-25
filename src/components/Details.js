@@ -28,18 +28,21 @@ function Details() {
     }
 
     const educationEntries = [{
+        id: 1,
         org: 'ABC University',
         title: 'Bachelor of Science',
         date:'Jan 2019 - Mar 2023'
     }]
 
     const workEntries = [{
+        id: 2,
         org: 'CompanyA',
         title: 'Manager',
         date: 'Apr 2015 - Apr 2023'
     }]
 
     const extraEntries = [{
+        id: 3,
         org: 'Church',
         title: 'Pastor',
         date: 'Apr 2014 - Current'

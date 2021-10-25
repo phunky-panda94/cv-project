@@ -27,6 +27,24 @@ function Details() {
 
     }
 
+    const educationEntries = [{
+        org: 'ABC University',
+        title: 'Bachelor of Science',
+        date:'Jan 2019 - Mar 2023'
+    }]
+
+    const workEntries = [{
+        org: 'CompanyA',
+        title: 'Manager',
+        date: 'Apr 2015 - Apr 2023'
+    }]
+
+    const extraEntries = [{
+        org: 'Church',
+        title: 'Pastor',
+        date: 'Apr 2014 - Current'
+    }]
+
     return (
         <div className="container flex flex-col flex-ai-c flex-jc-se">
             {formHidden && <div className="modal flex flex-jc-c flex-ai-c">
@@ -38,9 +56,9 @@ function Details() {
                 <InputField label="Phone" />
                 <InputField label="Email" />
             </div>
-            <Section add={handleClick} heading="Education" org="Institution" />
-            <Section add={handleClick} heading="Work Experience" org="Company" />
-            <Section add={handleClick} heading="Extra-curricular" org="Organisation" />
+            <Section add={handleClick} entries={educationEntries} heading="Education" org="Institution" />
+            <Section add={handleClick} entries={workEntries} heading="Work Experience" org="Company" />
+            <Section add={handleClick} entries={extraEntries} heading="Extra-curricular" org="Organisation" />
         </div>
     )
 }

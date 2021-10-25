@@ -2,7 +2,7 @@ function Section(props) {
     return (
         <div className="section flex flex-col flex-jc-sb">
             <SectionHeading add={props.add} text={props.heading} org={props.org}/>
-            <Box />
+            <Box entries={props.entries}/>
         </div>
     )
 }
@@ -18,10 +18,13 @@ function SectionHeading(props) {
     )
 }
 
-function Box() {
+function Box(props) {
+
     return (
         <div className="box">
-            <Entry org="ABC University" title="Bachelor of Science" date="Mar 2021" />
+            {props.entries.map(entry => 
+                <Entry org={entry.org} title={entry.title} date={entry.date} />
+            )}
         </div>
     )
 }

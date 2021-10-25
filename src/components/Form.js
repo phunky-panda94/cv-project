@@ -1,10 +1,16 @@
 import InputField from './InputField';
 
 function Form(props) {
+
+    // TODO: add entry to local storage
+    function handleSubmit() {
+
+    }
+
     return (
         <div className="form flex flex-col flex-jc-c flex-ai-c">
             <Close close={props.close}/>
-            <form className="form-input flex flex-col flex-jc-sb flex-ai-c">
+            <form className="form-input flex flex-col flex-jc-sb flex-ai-c" onSubmit={handleSubmit}>
                 <FormHeading text={props.heading} />
                 <InputField type="text" label={props.org} />
                 <InputField type="text" label="Title" />

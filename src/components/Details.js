@@ -12,6 +12,7 @@ function Details() {
         org: ''
     })
 
+    // TODO: refactor to use state
     let educationEntries;
     let workEntries;
     let extraEntries;
@@ -28,19 +29,29 @@ function Details() {
         extraEntries = new Map(Object.entries(JSON.parse(localStorage.getItem('Extra-curricular'))));
     }
 
+    const [education, setEducation] = useState(educationEntries);
+    const [work, setWork] = useState(workEntries);
+    const [extra, setExtra] = useState(extraEntries);
+
     function toggleHidden() {
         formHidden ? setFormHidden(false) : setFormHidden(true);
     }
 
-    function handleClick(heading, org) {
-        
+    function handleAdd(heading, org) {
         setFormDetails({
             heading: heading,
             org: org
         })
 
         toggleHidden();
+    }
 
+    function handleEducation(entryId) {
+        education.delete(entryId)
+        const updatedEducation = new Map(education);
+
+        localStorage.setItem('Education', JSON.stringify(Object.fromEntries(updatedEducation)));
+        setEducation(updatedEducation);
     }
 
     return (
@@ -54,9 +65,9 @@ function Details() {
                 <InputField label="Phone" />
                 <InputField label="Email" />
             </div>
-            <Section add={handleClick} entries={educationEntries} heading="Education" org="Institution" />
-            <Section add={handleClick} entries={workEntries} heading="Work Experience" org="Company" />
-            <Section add={handleClick} entries={extraEntries} heading="Extra-curricular" org="Organisation" />
+            <Section add={handleAdd} delete={handleEducation} entries={education} heading="Education" org="Institution" />
+            <Section add={handleAdd} entries={work} heading="Work Experience" org="Company" />
+            <Section add={handleAdd} entries={extra} heading="Extra-curricular" org="Organisation" />
         </div>
     )
 }

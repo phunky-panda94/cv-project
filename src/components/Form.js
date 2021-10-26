@@ -69,12 +69,13 @@ function Form(props) {
             </form>
         </div>
     )
+    
 }
 
 function FormHeading(props) {
     return (
         <div className="form-div flex flex-jc-c">
-            <div className="form-heading">{props.text}</div>
+            <div className="form-heading">Add {props.text}</div>
         </div>
     )
 }

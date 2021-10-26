@@ -6,6 +6,16 @@
     border: 1px solid black;
     border-radius: 10px;
     height: 80%;
+    overflow: auto;
+}
+
+.box::-webkit-scrollbar {
+    width: 0.5em;
+  }
+   
+.box::-webkit-scrollbar-thumb {
+    background-color: lightgrey;
+    border-radius: 1em;
 }
 
 .container {
@@ -14,9 +24,14 @@
 }
 
 .entry {
+    border: 1px solid black;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
+}
+
+.entry-box {
+    width: 30%;
 }
 
 .form {

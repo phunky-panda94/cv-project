@@ -9,7 +9,6 @@ function Section(props) {
 
 function SectionHeading(props) {
 
-
     return (
         <div className="section-heading flex flex-jc-sb flex-ai-c">
             <h2>{props.text}</h2>
@@ -39,11 +38,11 @@ function Box(props) {
 
 function Entry(props) {
     return (
-        <div className="border entry flex flex-jc-sb flex-ai-c">
-            <span>{props.org}</span>
-            <span>{props.title}</span>
-            <span>{props.date}</span>
-            <div>
+        <div className="entry flex flex-ai-c">
+            <span className="entry-box">{props.org}</span>
+            <span className="entry-box">{props.title}</span>
+            <span className="entry-box flex flex-jc-c">{props.date}</span>
+            <div className="flex flex-jc-fe flex-ai-c">
                 <span className="material-icons">edit</span>
                 <span className="material-icons">delete</span>
             </div>

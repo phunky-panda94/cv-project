@@ -20,11 +20,19 @@ function SectionHeading(props) {
 
 function Box(props) {
 
-    return (
-        <div className="box">
-            {props.entries.map(entry => 
+    let entries = []
+
+    if (props.entries != null) {
+        for (let entry of props.entries.values()) {
+            entries.push(
                 <Entry key={entry.id} org={entry.org} title={entry.title} date={entry.date} />
-            )}
+            )
+        }
+    }
+
+    return (
+        <div key={Date.now()} className="box">
+            {entries}
         </div>
     )
 }

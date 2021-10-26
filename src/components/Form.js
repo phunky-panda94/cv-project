@@ -2,7 +2,6 @@ import InputField from './InputField';
 
 function Form(props) {
 
-    
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -13,12 +12,28 @@ function Form(props) {
             date: `${event.target.elements['Start Date'].value} - ${event.target.elements['End Date'].value}`
         }
 
-        // TODO: add entry to local storage
-        console.log(entry);
+        save(props.heading,entry);
 
+        // close and reset form
         props.close();
         event.target.reset();
         
+    }
+
+    function save(key,value) {
+
+        let entries;
+
+        if (localStorage.getItem(key) == null) {
+            entries = new Map()
+            entries.set(value.id,value)
+        } else {
+            entries = new Map(Object.entries(JSON.parse(localStorage.getItem(key))));
+            entries.set(value.id,value)
+        }
+
+        localStorage.setItem(key,JSON.stringify(Object.fromEntries(entries)));
+
     }
 
     return (

@@ -12,6 +12,22 @@ function Details() {
         org: ''
     })
 
+    let educationEntries;
+    let workEntries;
+    let extraEntries;
+
+    if (localStorage.getItem('Education') != null) {
+        educationEntries = new Map(Object.entries(JSON.parse(localStorage.getItem('Education'))));
+    } 
+    
+    if (localStorage.getItem('Work Experience') != null) {
+        workEntries = new Map(Object.entries(JSON.parse(localStorage.getItem('Work Experience'))));
+    }
+
+    if (localStorage.getItem('Extra-curricular') != null) {
+        extraEntries = new Map(Object.entries(JSON.parse(localStorage.getItem('Extra-curricular'))));
+    }
+
     function toggleHidden() {
         formHidden ? setFormHidden(false) : setFormHidden(true);
     }
@@ -26,27 +42,6 @@ function Details() {
         toggleHidden();
 
     }
-
-    const educationEntries = [{
-        id: 1,
-        org: 'ABC University',
-        title: 'Bachelor of Science',
-        date:'Jan 2019 - Mar 2023'
-    }]
-
-    const workEntries = [{
-        id: 2,
-        org: 'CompanyA',
-        title: 'Manager',
-        date: 'Apr 2015 - Apr 2023'
-    }]
-
-    const extraEntries = [{
-        id: 3,
-        org: 'Church',
-        title: 'Pastor',
-        date: 'Apr 2014 - Current'
-    }]
 
     return (
         <div className="container flex flex-col flex-ai-c flex-jc-se">

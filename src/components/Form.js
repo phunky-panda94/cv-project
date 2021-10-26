@@ -3,13 +3,14 @@ import InputField from './InputField';
 function Form(props) {
 
     function handleSubmit(event) {
+        
         event.preventDefault();
 
         let entry = {
             id: String(Date.now()),
             org: event.target.elements[props.org].value,
             title: event.target.elements['Title'].value,
-            date: `${event.target.elements['Start Date'].value} - ${event.target.elements['End Date'].value}`
+            date: formatDates(event.target.elements['Start Date'].value, event.target.elements['End Date'].value)
         }
 
         save(props.heading,entry);
@@ -33,6 +34,25 @@ function Form(props) {
         }
 
         localStorage.setItem(key,JSON.stringify(Object.fromEntries(entries)));
+
+    }
+
+    function formatDates(startDate, endDate) {
+
+        let today = new Date();
+        let formattedToday = `${today.toDateString().split(' ')[1]} ${today.toDateString().split(' ')[3]}`
+
+        let fullStartDate = new Date(startDate);
+        let formattedStartDate = `${fullStartDate.toDateString().split(' ')[1]} ${fullStartDate.toDateString().split(' ')[3]}`
+
+        let fullEndDate = new Date(endDate);
+        let formattedEndDate = `${fullEndDate.toDateString().split(' ')[1]} ${fullEndDate.toDateString().split(' ')[3]}`
+
+        if (formattedEndDate == formattedToday) {
+            formattedEndDate = 'Current';
+        }
+
+        return `${formattedStartDate} - ${formattedEndDate}`;
 
     }
 

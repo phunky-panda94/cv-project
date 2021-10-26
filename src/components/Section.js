@@ -22,13 +22,19 @@ function Box(props) {
     let entries = []
 
     if (props.entries != null) {
-        for (let entry of props.entries.values()) {
-            entries.push(
-                <Entry key={entry.id} entryKey={entry.id} delete={props.delete} section={props.section} org={entry.org} title={entry.title} date={entry.date} />
-            )
-        }
-    }
 
+        for (let entry of props.entries.values()) {
+            
+            if (entry.section === props.section) {
+                entries.push(
+                    <Entry key={entry.id} entryKey={entry.id} delete={props.delete} section={props.section} org={entry.org} title={entry.title} date={entry.date} />
+                )
+            }
+
+        }
+
+    }
+    
     return (
         <div key={Date.now()} className="box">
             {entries}

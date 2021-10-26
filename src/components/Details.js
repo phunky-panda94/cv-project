@@ -11,26 +11,13 @@ function Details(props) {
         org: ''
     })
 
-    // TODO: refactor to use state
-    let educationEntries;
-    let workEntries;
-    let extraEntries;
-
-    if (localStorage.getItem('Education') != null) {
-        educationEntries = new Map(Object.entries(JSON.parse(localStorage.getItem('Education'))));
-    } 
-    
-    if (localStorage.getItem('Work Experience') != null) {
-        workEntries = new Map(Object.entries(JSON.parse(localStorage.getItem('Work Experience'))));
-    }
-
-    if (localStorage.getItem('Extra-curricular') != null) {
-        extraEntries = new Map(Object.entries(JSON.parse(localStorage.getItem('Extra-curricular'))));
-    }
-
-    const [education, setEducation] = useState(educationEntries);
-    const [work, setWork] = useState(workEntries);
-    const [extra, setExtra] = useState(extraEntries);
+    const [entries, setEntries] = useState(() => {
+        if (localStorage.getItem('entries') != null) {
+            return new Map(Object.entries(JSON.parse(localStorage.getItem('entries'))));
+        } else {
+            return new Map();
+        }
+    });
 
     function handleAdd(heading, org) {
         setFormDetails({
@@ -41,19 +28,16 @@ function Details(props) {
         props.toggleHidden();
     }
 
-    function handleEducation(entryId) {
-        education.delete(entryId)
-        const updatedEducation = new Map(education);
+    function handleDelete(entryId) {
+        entries.delete(entryId)
+        const updatedEntries = new Map(entries);
 
-        localStorage.setItem('Education', JSON.stringify(Object.fromEntries(updatedEducation)));
-        setEducation(updatedEducation);
+        localStorage.setItem('entries', JSON.stringify(Object.fromEntries(updatedEntries)));
+        setEntries(updatedEntries);
     }
 
     return (
         <div className="container flex flex-col flex-ai-c flex-jc-se">
-            {/* {formHidden && <div className="modal flex flex-jc-c flex-ai-c">
-                <Form close={toggleHidden} heading={formDetails.heading} org={formDetails.org} />
-            </div>} */}
             {props.hidden && <Form close={props.toggleHidden} heading={formDetails.heading} org={formDetails.org} />}
             <Heading text="Make-a-CV"/>
             <div className="input flex flex-col flex-jc-sb">
@@ -61,9 +45,9 @@ function Details(props) {
                 <InputField label="Phone" />
                 <InputField label="Email" />
             </div>
-            <Section add={handleAdd} delete={handleEducation} entries={education} heading="Education" org="Institution" />
-            <Section add={handleAdd} entries={work} heading="Work Experience" org="Company" />
-            <Section add={handleAdd} entries={extra} heading="Extra-curricular" org="Organisation" />
+            <Section add={handleAdd} delete={handleDelete} entries={entries} heading="Education" org="Institution" />
+            <Section add={handleAdd} entries={entries} heading="Work Experience" org="Company" />
+            <Section add={handleAdd} entries={entries} heading="Extra-curricular" org="Organisation" />
         </div>
     )
 }

@@ -5,15 +5,16 @@ function Form(props) {
     function handleSubmit(event) {
         
         event.preventDefault();
-
+        
         let entry = {
             id: String(Date.now()),
+            section: props.heading,
             org: event.target.elements[props.org].value,
             title: event.target.elements['Title'].value,
             date: formatDates(event.target.elements['Start Date'].value, event.target.elements['End Date'].value)
         }
-
-        save(props.heading,entry);
+        
+        save(entry);
 
         // close and reset form
         props.close();
@@ -21,19 +22,19 @@ function Form(props) {
         
     }
 
-    function save(key,value) {
+    function save(entry) {
 
         let entries;
-
-        if (localStorage.getItem(key) == null) {
+        
+        if (localStorage.getItem('entries') == null) {
             entries = new Map()
-            entries.set(value.id,value)
+            entries.set(entry.id,entry)
         } else {
-            entries = new Map(Object.entries(JSON.parse(localStorage.getItem(key))));
-            entries.set(value.id,value)
+            entries = new Map(Object.entries(JSON.parse(localStorage.getItem('entries'))));
+            entries.set(entry.id,entry)
         }
 
-        localStorage.setItem(key,JSON.stringify(Object.fromEntries(entries)));
+        localStorage.setItem('entries',JSON.stringify(Object.fromEntries(entries)));
 
     }
 

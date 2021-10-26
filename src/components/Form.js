@@ -48,7 +48,7 @@ function Form(props) {
         let fullEndDate = new Date(endDate);
         let formattedEndDate = `${fullEndDate.toDateString().split(' ')[1]} ${fullEndDate.toDateString().split(' ')[3]}`
 
-        if (formattedEndDate == formattedToday) {
+        if (formattedEndDate === formattedToday) {
             formattedEndDate = 'Current';
         }
 

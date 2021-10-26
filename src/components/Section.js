@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 function Section(props) {
     
     return (
@@ -50,16 +48,6 @@ function Entry(props) {
             </div>
         </div>
     )
-}
-
-function deleteEntry(key, entryId) {
-
-    let entries = new Map(Object.entries(JSON.parse(localStorage.getItem(key))));
-
-    entries.delete(entryId);
-
-    localStorage.setItem(key, JSON.stringify(Object.fromEntries(entries)));
-
 }
 
 export default Section;

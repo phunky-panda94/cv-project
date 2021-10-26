@@ -4,9 +4,8 @@ import InputField from './InputField';
 import Form from './Form';
 import Section from './Section';
 
-function Details() {
+function Details(props) {
 
-    const [formHidden, setFormHidden] = useState(false);
     const [formDetails, setFormDetails] = useState({
         heading: '',
         org: ''
@@ -33,17 +32,13 @@ function Details() {
     const [work, setWork] = useState(workEntries);
     const [extra, setExtra] = useState(extraEntries);
 
-    function toggleHidden() {
-        formHidden ? setFormHidden(false) : setFormHidden(true);
-    }
-
     function handleAdd(heading, org) {
         setFormDetails({
             heading: heading,
             org: org
         })
 
-        toggleHidden();
+        props.toggleHidden();
     }
 
     function handleEducation(entryId) {
@@ -56,9 +51,10 @@ function Details() {
 
     return (
         <div className="container flex flex-col flex-ai-c flex-jc-se">
-            {formHidden && <div className="modal flex flex-jc-c flex-ai-c">
+            {/* {formHidden && <div className="modal flex flex-jc-c flex-ai-c">
                 <Form close={toggleHidden} heading={formDetails.heading} org={formDetails.org} />
-            </div>}
+            </div>} */}
+            {props.hidden && <Form close={props.toggleHidden} heading={formDetails.heading} org={formDetails.org} />}
             <Heading text="Make-a-CV"/>
             <div className="input flex flex-col flex-jc-sb">
                 <InputField label="Name" />

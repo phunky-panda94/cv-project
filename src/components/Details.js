@@ -12,42 +12,58 @@ function Details(props) {
     })
 
     const [entries, setEntries] = useState(() => {
+
         if (localStorage.getItem('entries') != null) {
             return new Map(Object.entries(JSON.parse(localStorage.getItem('entries'))));
         } else {
             return new Map();
         }
-    });
 
-    function handleAdd(heading, org) {
+    })
+
+    function showForm(heading, org) {
+
         setFormDetails({
             heading: heading,
             org: org
         })
 
         props.toggleHidden();
+
     }
 
-    function handleDelete(entryId) {
+    function addEntry(entry) {
+
+        entries.set(entry.id,entry);
+        const updatedEntries = new Map(entries);
+
+        localStorage.setItem('entries', JSON.stringify(Object.fromEntries(updatedEntries)));
+        setEntries(updatedEntries);
+
+    }
+
+    function deleteEntry(entryId) {
+
         entries.delete(entryId)
         const updatedEntries = new Map(entries);
 
         localStorage.setItem('entries', JSON.stringify(Object.fromEntries(updatedEntries)));
         setEntries(updatedEntries);
+
     }
 
     return (
         <div className="container flex flex-col flex-ai-c flex-jc-se">
-            {props.hidden && <Form close={props.toggleHidden} heading={formDetails.heading} org={formDetails.org} />}
+            {props.hidden && <Form add={addEntry} close={props.toggleHidden} heading={formDetails.heading} org={formDetails.org} />}
             <Heading text="Make-a-CV"/>
             <div className="input flex flex-col flex-jc-sb">
                 <InputField label="Name" />
                 <InputField label="Phone" />
                 <InputField label="Email" />
             </div>
-            <Section add={handleAdd} delete={handleDelete} entries={entries} heading="Education" org="Institution" />
-            <Section add={handleAdd} entries={entries} heading="Work Experience" org="Company" />
-            <Section add={handleAdd} entries={entries} heading="Extra-curricular" org="Organisation" />
+            <Section showForm={showForm} delete={deleteEntry} entries={entries} heading="Education" org="Institution" />
+            <Section showForm={showForm} delete={deleteEntry} entries={entries} heading="Work Experience" org="Company" />
+            <Section showForm={showForm} delete={deleteEntry} entries={entries} heading="Extra-curricular" org="Organisation" />
         </div>
     )
 }

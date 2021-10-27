@@ -14,28 +14,12 @@ function Form(props) {
             date: formatDates(event.target.elements['Start Date'].value, event.target.elements['End Date'].value)
         }
         
-        save(entry);
+        props.add(entry);
 
         // close and reset form
         props.close();
         event.target.reset();
         
-    }
-
-    function save(entry) {
-
-        let entries;
-        
-        if (localStorage.getItem('entries') == null) {
-            entries = new Map()
-            entries.set(entry.id,entry)
-        } else {
-            entries = new Map(Object.entries(JSON.parse(localStorage.getItem('entries'))));
-            entries.set(entry.id,entry)
-        }
-
-        localStorage.setItem('entries',JSON.stringify(Object.fromEntries(entries)));
-
     }
 
     function formatDates(startDate, endDate) {

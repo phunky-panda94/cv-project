@@ -2,8 +2,8 @@ function Section(props) {
     
     return (
         <div className="section flex flex-col flex-jc-sb">
-            <SectionHeading add={props.add} text={props.heading} org={props.org}/>
-            <Box section={props.heading} delete={props.delete} entries={props.entries}/>
+            <SectionHeading showForm={props.showForm} text={props.heading} org={props.org}/>
+            <Box section={props.heading} add={props.add} delete={props.delete} entries={props.entries}/>
         </div>
     )
 }
@@ -12,7 +12,7 @@ function SectionHeading(props) {
     return (
         <div className="section-heading flex flex-jc-sb flex-ai-c">
             <h2>{props.text}</h2>
-            <span className="material-icons" onClick={() => props.add(props.text, props.org)}>add</span>
+            <span className="material-icons" onClick={() => props.showForm(props.text, props.org)}>add</span>
         </div>
     )
 }

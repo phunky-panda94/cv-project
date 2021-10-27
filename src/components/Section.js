@@ -3,7 +3,7 @@ function Section(props) {
     return (
         <div className="section flex flex-col flex-jc-sb">
             <SectionHeading showForm={props.showForm} text={props.heading} org={props.org}/>
-            <Box section={props.heading} add={props.add} delete={props.delete} entries={props.entries}/>
+            <Box section={props.heading} edit={props.edit} delete={props.delete} entries={props.entries} label={props.org}/>
         </div>
     )
 }
@@ -27,7 +27,11 @@ function Box(props) {
             
             if (entry.section === props.section) {
                 entries.push(
-                    <Entry key={entry.id} entryKey={entry.id} delete={props.delete} section={props.section} org={entry.org} title={entry.title} date={entry.date} />
+                    <Entry key={entry.id} entryKey={entry.id} 
+                    edit={props.edit} delete={props.delete} 
+                    section={props.section} org={entry.org} 
+                    title={entry.title} date={entry.date} 
+                    label={props.label} />
                 )
             }
 
@@ -49,7 +53,7 @@ function Entry(props) {
             <span className="entry-box">{props.title}</span>
             <span className="entry-box flex flex-jc-c">{props.date}</span>
             <div className="flex flex-jc-fe flex-ai-c">
-                <span className="material-icons">edit</span>
+                <span className="material-icons" onClick={() => props.edit(props.entryKey, props.section, props.label)}>edit</span>
                 <span className="material-icons" onClick={() => props.delete(props.entryKey)}>delete</span>
             </div>
         </div>

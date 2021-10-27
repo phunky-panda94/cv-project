@@ -6,9 +6,17 @@ import Section from './Section';
 
 function Details(props) {
 
-    const [formDetails, setFormDetails] = useState({
+    const [formLabels, setformLabels] = useState({
         heading: '',
         org: ''
+    })
+
+    const [formDetails, setFormDetails] = useState({
+        org: '',
+        title: '',
+        startDate: '',
+        endDate: '',
+        details: ''
     })
 
     const [entries, setEntries] = useState(() => {
@@ -23,7 +31,7 @@ function Details(props) {
 
     function showForm(heading, org) {
 
-        setFormDetails({
+        setformLabels({
             heading: heading,
             org: org
         })
@@ -52,18 +60,26 @@ function Details(props) {
 
     }
 
+    // TODO: implement edit functionality
+    function editEntry(entryId, section, org) {
+        
+        showForm(section,org);
+
+
+    }
+
     return (
         <div className="container flex flex-col flex-ai-c flex-jc-se">
-            {props.hidden && <Form add={addEntry} close={props.toggleHidden} heading={formDetails.heading} org={formDetails.org} />}
+            {props.hidden && <Form add={addEntry} close={props.toggleHidden} heading={formLabels.heading} org={formLabels.org} />}
             <Heading text="Make-a-CV"/>
             <div className="input flex flex-col flex-jc-sb">
                 <InputField label="Name" />
                 <InputField label="Phone" />
                 <InputField label="Email" />
             </div>
-            <Section showForm={showForm} delete={deleteEntry} entries={entries} heading="Education" org="Institution" />
-            <Section showForm={showForm} delete={deleteEntry} entries={entries} heading="Work Experience" org="Company" />
-            <Section showForm={showForm} delete={deleteEntry} entries={entries} heading="Extra-curricular" org="Organisation" />
+            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={entries} heading="Education" org="Institution" />
+            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={entries} heading="Work Experience" org="Company" />
+            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={entries} heading="Extra-curricular" org="Organisation" />
         </div>
     )
 }

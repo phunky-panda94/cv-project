@@ -79,7 +79,7 @@ function FormButtons() {
     return (
         <div className="form-div flex flex-jc-fe">
             <button type="submit">Add</button>
-            <button type="button">Discard</button>
+            <button type="button">Cancel</button>
         </div>
     )
 }

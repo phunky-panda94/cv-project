@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Heading from './Heading';
-import InputField from './InputField';
+import { InputField } from './Input';
 import Form from './Form';
 import Section from './Section';
 

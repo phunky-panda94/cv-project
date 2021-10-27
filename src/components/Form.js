@@ -1,4 +1,4 @@
-import InputField from './InputField';
+import { InputField, TextArea } from './Input';
 
 function Form(props) {
 
@@ -11,7 +11,8 @@ function Form(props) {
             section: props.heading,
             org: event.target.elements[props.org].value,
             title: event.target.elements['Title'].value,
-            date: formatDates(event.target.elements['Start Date'].value, event.target.elements['End Date'].value)
+            date: formatDates(event.target.elements['Start Date'].value, event.target.elements['End Date'].value),
+            details: event.target.elements['Details'].value
         }
         
         props.add(entry);
@@ -50,6 +51,7 @@ function Form(props) {
                 <InputField type="text" label="Title" required={false} />
                 <InputField type="date" label="Start Date" required={true} />
                 <InputField type="date" label="End Date" required={true} />
+                <TextArea label="Details" />
                 <FormButtons />
             </form>
         </div>

@@ -46,10 +46,10 @@ function Form(props) {
             <Close close={props.close}/>
             <form className="form-input flex flex-col flex-jc-sb flex-ai-c" onSubmit={handleSubmit}>
                 <FormHeading text={props.heading} />
-                <InputField type="text" label={props.org} />
-                <InputField type="text" label="Title" />
-                <InputField type="date" label="Start Date" />
-                <InputField type="date" label="End Date" />
+                <InputField type="text" label={props.org} required={true} />
+                <InputField type="text" label="Title" required={false} />
+                <InputField type="date" label="Start Date" required={true} />
+                <InputField type="date" label="End Date" required={true} />
                 <FormButtons />
             </form>
         </div>

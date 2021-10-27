@@ -3,7 +3,8 @@ function InputField(props) {
         <div className="field">
             <label htmlFor={props.label}>
                 <span>{props.label}</span>
-                <input type={props.type} name={props.label}></input>
+                {props.required ? <input type={props.type} name={props.label} required></input> :
+                <input type={props.type} name={props.label}></input>}
             </label>
         </div>
     )

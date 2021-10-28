@@ -19,16 +19,6 @@ function Details(props) {
     const [endDate, setEndDate] = useState('');
     const [details, setDetails] = useState('');
 
-    const [entries, setEntries] = useState(() => {
-
-        if (localStorage.getItem('entries') != null) {
-            return new Map(Object.entries(JSON.parse(localStorage.getItem('entries'))));
-        } else {
-            return new Map();
-        }
-
-    })
-
     function showForm(heading, orgLabel) {
 
         setformLabels({
@@ -55,11 +45,11 @@ function Details(props) {
 
     function addEntry(entry) {
 
-        entries.set(entry.id,entry);
-        const updatedEntries = new Map(entries);
+        props.entries.set(entry.id,entry);
+        const updatedEntries = new Map(props.entries);
 
         localStorage.setItem('entries', JSON.stringify(Object.fromEntries(updatedEntries)));
-        setEntries(updatedEntries);
+        props.setEntries(updatedEntries);
 
     }
 
@@ -67,11 +57,11 @@ function Details(props) {
 
         if (window.confirm('Are you sure?')) {
 
-            entries.delete(entryId)
-            const updatedEntries = new Map(entries);
+            props.entries.delete(entryId)
+            const updatedEntries = new Map(props.entries);
 
             localStorage.setItem('entries', JSON.stringify(Object.fromEntries(updatedEntries)));
-            setEntries(updatedEntries);
+            props.setEntries(updatedEntries);
 
         }
 
@@ -81,7 +71,7 @@ function Details(props) {
         
         setEdit(true);
 
-        let entry = entries.get(entryId);
+        let entry = props.entries.get(entryId);
 
         setId(entryId);
         setOrg(entry.org);
@@ -112,6 +102,18 @@ function Details(props) {
             case 'Details':
                 setDetails(event.target.value);
                 break;
+            case 'Name':
+                props.setName(event.target.value);
+                localStorage.setItem('name',event.target.value);
+                break;
+            case 'Phone':
+                props.setPhone(event.target.value);
+                localStorage.setItem('phone',event.target.value);
+                break;
+            case 'Email':
+                props.setEmail(event.target.value);
+                localStorage.setItem('email',event.target.value);
+                break;
             default:
         }
 
@@ -137,13 +139,13 @@ function Details(props) {
             }
             <Heading text="Make-a-CV"/>
             <div className="input flex flex-col flex-jc-sb">
-                <InputField label="Name" />
-                <InputField label="Phone" />
-                <InputField label="Email" />
+                <InputField label="Name" change={handleChange} />
+                <InputField label="Phone" change={handleChange} />
+                <InputField label="Email" change={handleChange} />
             </div>
-            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={entries} heading="Education" orgLabel="Institution" />
-            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={entries} heading="Work Experience" orgLabel="Company" />
-            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={entries} heading="Extra-curricular" orgLabel="Organisation" />
+            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Education" orgLabel="Institution" />
+            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Work Experience" orgLabel="Company" />
+            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Extra-curricular" orgLabel="Organisation" />
         </div>
     )
 }

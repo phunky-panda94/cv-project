@@ -1,4 +1,4 @@
-function Section(props) {
+export default function Section(props) {
     
     return (
         <div className="section flex flex-col flex-jc-sb">
@@ -17,7 +17,7 @@ function SectionHeading(props) {
     )
 }
 
-function Box(props) {
+export function Box(props) {
 
     let entries = []
 
@@ -84,5 +84,3 @@ function formatDates(startDate, endDate) {
     return `${formattedStartDate} - ${formattedEndDate}`;
 
 }
-
-export default Section;

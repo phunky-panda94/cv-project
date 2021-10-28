@@ -3,8 +3,7 @@ export function InputField(props) {
         <div>
             <label htmlFor={props.label}>
                 <span>{props.label}</span>
-                {props.required ? <input type={props.type} name={props.label} required></input> :
-                <input type={props.type} name={props.label}></input>}
+                <input type={props.type} name={props.label} onChange={props.change} value={props.value} required={props.required}></input>
             </label>
         </div>
     )
@@ -15,7 +14,7 @@ export function TextArea(props) {
         <div>
             <label className="flex flex-jc-fs" htmlFor={props.label}>
                 <span>{props.label}</span>
-                <textarea name={props.label}></textarea>
+                <textarea name={props.label} value={props.value} onChange={props.change}></textarea>
             </label>
         </div>
     )

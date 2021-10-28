@@ -6,12 +6,14 @@ function Form(props) {
         
         event.preventDefault();
         
+        // TODO: only create id if adding new entry
         let entry = {
             id: String(Date.now()),
             section: props.heading,
-            org: event.target.elements[props.org].value,
+            org: event.target.elements[props.orgLabel].value,
             title: event.target.elements['Title'].value,
-            date: formatDates(event.target.elements['Start Date'].value, event.target.elements['End Date'].value),
+            startDate: event.target.elements['Start Date'].value,
+            endDate: event.target.elements['End Date'].value,
             details: event.target.elements['Details'].value
         }
         
@@ -22,36 +24,17 @@ function Form(props) {
         event.target.reset();
         
     }
-
-    function formatDates(startDate, endDate) {
-
-        let today = new Date();
-        let formattedToday = `${today.toDateString().split(' ')[1]} ${today.toDateString().split(' ')[3]}`
-
-        let fullStartDate = new Date(startDate);
-        let formattedStartDate = `${fullStartDate.toDateString().split(' ')[1]} ${fullStartDate.toDateString().split(' ')[3]}`
-
-        let fullEndDate = new Date(endDate);
-        let formattedEndDate = `${fullEndDate.toDateString().split(' ')[1]} ${fullEndDate.toDateString().split(' ')[3]}`
-
-        if (formattedEndDate === formattedToday) {
-            formattedEndDate = 'Current';
-        }
-
-        return `${formattedStartDate} - ${formattedEndDate}`;
-
-    }
-
+    
     return (
         <div className="form flex flex-col flex-jc-c flex-ai-c">
             <Close close={props.close}/>
             <form className="form-input flex flex-col flex-jc-sb flex-ai-c" onSubmit={handleSubmit}>
                 <FormHeading text={props.heading} />
-                <InputField type="text" label={props.org} required={true} />
-                <InputField type="text" label="Title" required={false} />
-                <InputField type="date" label="Start Date" required={true} />
-                <InputField type="date" label="End Date" required={true} />
-                <TextArea label="Details" />
+                <InputField type="text" label={props.orgLabel} change={props.change} value={props.edit ? props.org : ''} required={true} />
+                <InputField type="text" label="Title" change={props.change} value={props.edit ? props.title : ''} required={false} />
+                <InputField type="date" label="Start Date" change={props.change} value={props.edit ? props.startDate : ''} required={true} />
+                <InputField type="date" label="End Date" change={props.change} value={props.edit ? props.endDate : ''} required={true} />
+                <TextArea label="Details" value={props.edit ? props.details : ''} change={props.change}/>
                 <FormButtons />
             </form>
         </div>

@@ -2,8 +2,8 @@ function Section(props) {
     
     return (
         <div className="section flex flex-col flex-jc-sb">
-            <SectionHeading showForm={props.showForm} text={props.heading} org={props.org}/>
-            <Box section={props.heading} edit={props.edit} delete={props.delete} entries={props.entries} label={props.org}/>
+            <SectionHeading showForm={props.showForm} text={props.heading} orgLabel={props.orgLabel}/>
+            <Box section={props.heading} edit={props.edit} delete={props.delete} entries={props.entries} orgLabel={props.orgLabel}/>
         </div>
     )
 }
@@ -12,7 +12,7 @@ function SectionHeading(props) {
     return (
         <div className="section-heading flex flex-jc-sb flex-ai-c">
             <h2>{props.text}</h2>
-            <span className="material-icons" onClick={() => props.showForm(props.text, props.org)}>add</span>
+            <span className="material-icons" onClick={() => props.showForm(props.text, props.orgLabel)}>add</span>
         </div>
     )
 }
@@ -27,11 +27,17 @@ function Box(props) {
             
             if (entry.section === props.section) {
                 entries.push(
-                    <Entry key={entry.id} entryKey={entry.id} 
-                    edit={props.edit} delete={props.delete} 
-                    section={props.section} org={entry.org} 
-                    title={entry.title} date={entry.date} 
-                    label={props.label} />
+                    <Entry 
+                        key={entry.id} 
+                        entryKey={entry.id} 
+                        edit={props.edit} 
+                        delete={props.delete} 
+                        section={props.section} 
+                        org={entry.org} 
+                        title={entry.title} 
+                        date={formatDates(entry.startDate, entry.endDate)} 
+                        orgLabel={props.orgLabel}
+                    />
                 )
             }
 
@@ -53,11 +59,30 @@ function Entry(props) {
             <span className="entry-box">{props.title}</span>
             <span className="entry-box flex flex-jc-c">{props.date}</span>
             <div className="flex flex-jc-fe flex-ai-c">
-                <span className="material-icons" onClick={() => props.edit(props.entryKey, props.section, props.label)}>edit</span>
+                <span className="material-icons" onClick={() => props.edit(props.entryKey, props.section, props.orgLabel)}>edit</span>
                 <span className="material-icons" onClick={() => props.delete(props.entryKey)}>delete</span>
             </div>
         </div>
     )
+}
+
+function formatDates(startDate, endDate) {
+
+    let today = new Date();
+    let formattedToday = `${today.toDateString().split(' ')[1]} ${today.toDateString().split(' ')[3]}`
+
+    let fullStartDate = new Date(startDate);
+    let formattedStartDate = `${fullStartDate.toDateString().split(' ')[1]} ${fullStartDate.toDateString().split(' ')[3]}`
+
+    let fullEndDate = new Date(endDate);
+    let formattedEndDate = `${fullEndDate.toDateString().split(' ')[1]} ${fullEndDate.toDateString().split(' ')[3]}`
+
+    if (formattedEndDate === formattedToday) {
+        formattedEndDate = 'Current';
+    }
+
+    return `${formattedStartDate} - ${formattedEndDate}`;
+
 }
 
 export default Section;

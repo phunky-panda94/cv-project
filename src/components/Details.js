@@ -139,9 +139,9 @@ function Details(props) {
             }
             <Heading text="Make-a-CV"/>
             <div className="input flex flex-col flex-jc-sb">
-                <InputField label="Name" change={handleChange} />
-                <InputField label="Phone" change={handleChange} />
-                <InputField label="Email" change={handleChange} />
+                <InputField label="Name" change={handleChange} value={props.name}/>
+                <InputField label="Phone" change={handleChange} value={props.phone}/>
+                <InputField label="Email" change={handleChange} value={props.email}/>
             </div>
             <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Education" orgLabel="Institution" />
             <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Work Experience" orgLabel="Company" />

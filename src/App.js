@@ -33,7 +33,10 @@ function App() {
                 toggleHidden={toggleHidden} 
                 hidden={modalHidden} 
                 entries={entries} 
-                setEntries={setEntries} 
+                setEntries={setEntries}
+                name={name}
+                phone={phone}
+                email={email} 
                 setName={setName}
                 setPhone={setPhone}
                 setEmail={setEmail}

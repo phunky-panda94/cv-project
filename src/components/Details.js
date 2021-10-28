@@ -12,6 +12,7 @@ function Details(props) {
     })
 
     const [edit, setEdit] = useState(false);
+    const [id, setId] = useState('');
     const [org, setOrg] = useState('');
     const [title, setTitle] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -74,13 +75,13 @@ function Details(props) {
 
     }
 
-    // TODO: implement edit functionality
     function editEntry(entryId, section, orgLabel) {
         
         setEdit(true);
 
         // populate details
         let entry = entries.get(entryId);
+        setId(entryId);
         setOrg(entry.org);
         setTitle(entry.title);
         setStartDate(entry.startDate);
@@ -94,7 +95,7 @@ function Details(props) {
     }
 
     function handleChange(event) {
-
+        
         switch(event.target.name) {
             case 'Institution' || 'Company' || 'Organisation':
                 setOrg(event.target.value);
@@ -126,6 +127,7 @@ function Details(props) {
                     heading={formLabels.heading} 
                     orgLabel={formLabels.orgLabel} 
                     change={handleChange}
+                    id={id}
                     org={org}
                     title={title}
                     startDate={startDate}

@@ -7,8 +7,16 @@ function Form(props) {
         event.preventDefault();
         
         // TODO: only create id if adding new entry
+        let id;
+
+        if (props.edit) {
+            id = props.id
+        } else {
+            String(Date.now());
+        }  
+
         let entry = {
-            id: String(Date.now()),
+            id: id,
             section: props.heading,
             org: event.target.elements[props.orgLabel].value,
             title: event.target.elements['Title'].value,
@@ -30,11 +38,11 @@ function Form(props) {
             <Close close={props.close}/>
             <form className="form-input flex flex-col flex-jc-sb flex-ai-c" onSubmit={handleSubmit}>
                 <FormHeading text={props.heading} />
-                <InputField type="text" label={props.orgLabel} change={props.change} value={props.edit ? props.org : ''} required={true} />
-                <InputField type="text" label="Title" change={props.change} value={props.edit ? props.title : ''} required={false} />
-                <InputField type="date" label="Start Date" change={props.change} value={props.edit ? props.startDate : ''} required={true} />
-                <InputField type="date" label="End Date" change={props.change} value={props.edit ? props.endDate : ''} required={true} />
-                <TextArea label="Details" value={props.edit ? props.details : ''} change={props.change}/>
+                <InputField type="text" label={props.orgLabel} change={props.change} value={props.org} required={true} />
+                <InputField type="text" label="Title" change={props.change} value={props.title} required={false} />
+                <InputField type="date" label="Start Date" change={props.change} value={props.startDate} required={true} />
+                <InputField type="date" label="End Date" change={props.change} value={props.endDate} required={true} />
+                <TextArea label="Details" value={props.details} change={props.change}/>
                 <FormButtons />
             </form>
         </div>

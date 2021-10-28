@@ -42,6 +42,8 @@ function Details(props) {
 
     function closeForm() {
 
+        setEdit(false);
+
         setOrg('');
         setTitle('');
         setStartDate('');
@@ -79,16 +81,14 @@ function Details(props) {
         
         setEdit(true);
 
-        // populate details
         let entry = entries.get(entryId);
+
         setId(entryId);
         setOrg(entry.org);
         setTitle(entry.title);
         setStartDate(entry.startDate);
         setEndDate(entry.endDate);
         setDetails(entry.details);
-
-        // change 'Add' to 'Save changes'
 
         showForm(section,orgLabel);
 

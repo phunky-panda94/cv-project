@@ -43,7 +43,7 @@ function Form(props) {
                 <InputField type="date" label="Start Date" change={props.change} value={props.startDate} required={true} />
                 <InputField type="date" label="End Date" change={props.change} value={props.endDate} required={true} />
                 <TextArea label="Details" value={props.details} change={props.change}/>
-                <FormButtons />
+                <FormButtons edit={props.edit} />
             </form>
         </div>
     )
@@ -66,11 +66,11 @@ function Close(props) {
     )
 }
 
-function FormButtons() {
+function FormButtons(props) {
     return (
         <div className="form-div flex flex-jc-fe">
-            <button type="submit">Add</button>
-            <button type="button">Cancel</button>
+            <button type="submit">{props.edit ? 'Save changes' : 'Add'}</button>
+            <button type="button">{props.edit ? 'Dischard changes' : 'Cancel'}</button>
         </div>
     )
 }

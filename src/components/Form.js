@@ -6,7 +6,6 @@ function Form(props) {
         
         event.preventDefault();
         
-        // TODO: only create id if adding new entry
         let id;
 
         if (props.edit) {
@@ -27,9 +26,7 @@ function Form(props) {
         
         props.add(entry);
 
-        // close and reset form
         props.close();
-        event.target.reset();
         
     }
     

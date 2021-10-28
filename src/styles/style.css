@@ -52,6 +52,7 @@
 .form-div > button {
     cursor: pointer;
     margin-left: 10px;
+    min-width: 75px;
     padding: 5px;
 }
 

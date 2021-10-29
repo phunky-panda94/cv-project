@@ -68,17 +68,17 @@ function Entry(props) {
 
 function formatDates(startDate, endDate) {
 
-    let today = new Date();
-    let formattedToday = `${today.toDateString().split(' ')[1]} ${today.toDateString().split(' ')[3]}`
-
     let fullStartDate = new Date(startDate);
     let formattedStartDate = `${fullStartDate.toDateString().split(' ')[1]} ${fullStartDate.toDateString().split(' ')[3]}`
 
-    let fullEndDate = new Date(endDate);
-    let formattedEndDate = `${fullEndDate.toDateString().split(' ')[1]} ${fullEndDate.toDateString().split(' ')[3]}`
+    let fullEndDate;
+    let formattedEndDate;
 
-    if (formattedEndDate === formattedToday) {
-        formattedEndDate = 'Current';
+    if (endDate === 'Current') {
+        formattedEndDate = endDate;
+    } else {
+        fullEndDate = new Date(endDate);
+        formattedEndDate = `${fullEndDate.toDateString().split(' ')[1]} ${fullEndDate.toDateString().split(' ')[3]}`
     }
 
     return `${formattedStartDate} - ${formattedEndDate}`;

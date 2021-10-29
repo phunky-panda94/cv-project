@@ -117,6 +117,10 @@ label > span {
     width: 100px;
 }
 
+label[for='Current'] > span {
+    font-size: 14px;
+}
+
 .input > div > label > input {
     font-size: 16px;
     padding: 5px;

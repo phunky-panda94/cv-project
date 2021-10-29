@@ -1,18 +1,23 @@
+import React, { useState } from 'react';
 import { InputField, TextArea } from './Input';
 
 function Form(props) {
+
+    const [current, setCurrent] = useState(false);
+
+    function onCheck() {
+        current ? setCurrent(false) : setCurrent(true);
+    }
 
     function handleSubmit(event) {
         
         event.preventDefault();
         
         let id;
+        let endDate;
 
-        if (props.edit) {
-            id = props.id
-        } else {
-            String(Date.now());
-        }  
+        props.edit ? id = props.id : id = String(Date.now());
+        current ? endDate = 'Current' : endDate = event.target.elements['End Date'].value; 
 
         let entry = {
             id: id,
@@ -20,7 +25,7 @@ function Form(props) {
             org: event.target.elements[props.orgLabel].value,
             title: event.target.elements['Title'].value,
             startDate: event.target.elements['Start Date'].value,
-            endDate: event.target.elements['End Date'].value,
+            endDate: endDate,
             details: event.target.elements['Details'].value
         }
         
@@ -38,7 +43,7 @@ function Form(props) {
                 <InputField type="text" label={props.orgLabel} change={props.change} value={props.org} required={true} />
                 <InputField type="text" label="Title" change={props.change} value={props.title} required={false} />
                 <InputField type="date" label="Start Date" change={props.change} value={props.startDate} required={true} />
-                <InputField type="date" label="End Date" change={props.change} value={props.endDate} required={true} />
+                <InputField type="date" label="End Date" change={props.change} value={props.endDate} required={true} disabled={current} onCheck={onCheck}/>
                 <TextArea label="Details" value={props.details} change={props.change}/>
                 <FormButtons edit={props.edit} />
             </form>

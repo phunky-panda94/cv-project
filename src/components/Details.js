@@ -86,8 +86,10 @@ function Details(props) {
 
     function handleChange(event) {
         
-        switch(event.target.name) {
-            case 'Institution' || 'Company' || 'Organisation':
+        switch (event.target.name) {
+            case 'Institution':
+            case 'Company':
+            case 'Organisation':
                 setOrg(event.target.value);
                 break;
             case 'Title':
@@ -143,9 +145,9 @@ function Details(props) {
                 <InputField label="Phone" change={handleChange} value={props.phone}/>
                 <InputField label="Email" change={handleChange} value={props.email}/>
             </div>
-            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Education" orgLabel="Institution" />
-            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Work Experience" orgLabel="Company" />
-            <Section showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Extra-curricular" orgLabel="Organisation" />
+            <Section type="details" showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Education" orgLabel="Institution" />
+            <Section type="details" showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Work Experience" orgLabel="Company" />
+            <Section type="details" showForm={showForm} edit={editEntry} delete={deleteEntry} entries={props.entries} heading="Extra-curricular" orgLabel="Organisation" />
         </div>
     )
 }

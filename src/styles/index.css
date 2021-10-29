@@ -7,6 +7,11 @@ body, textarea {
   -moz-osx-font-smoothing: grayscale;
 }
 
+i, p, h1, h2, h3, h4 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

@@ -1,18 +1,17 @@
 export default function Section(props) {
-    
     return (
         <div className="section flex flex-col flex-jc-sb">
-            <SectionHeading showForm={props.showForm} text={props.heading} orgLabel={props.orgLabel}/>
-            <Box section={props.heading} edit={props.edit} delete={props.delete} entries={props.entries} orgLabel={props.orgLabel}/>
+            <SectionHeading type={props.type} showForm={props.showForm} text={props.heading} orgLabel={props.orgLabel}/>
+            <Box type={props.type} section={props.heading} edit={props.edit} delete={props.delete} entries={props.entries} orgLabel={props.orgLabel}/>
         </div>
     )
 }
 
-function SectionHeading(props) {
+export function SectionHeading(props) {
     return (
         <div className="section-heading flex flex-jc-sb flex-ai-c">
-            <h2>{props.text}</h2>
-            <span className="material-icons" onClick={() => props.showForm(props.text, props.orgLabel)}>add</span>
+            {props.text}
+            {props.type === 'details' && <span className="material-icons" onClick={() => props.showForm(props.text, props.orgLabel)}>add</span>}
         </div>
     )
 }
@@ -26,19 +25,38 @@ export function Box(props) {
         for (let entry of props.entries.values()) {
             
             if (entry.section === props.section) {
-                entries.push(
-                    <Entry 
-                        key={entry.id} 
-                        entryKey={entry.id} 
-                        edit={props.edit} 
-                        delete={props.delete} 
-                        section={props.section} 
-                        org={entry.org} 
-                        title={entry.title} 
-                        date={formatDates(entry.startDate, entry.endDate)} 
-                        orgLabel={props.orgLabel}
-                    />
-                )
+                
+                if (props.type === 'details') {
+                
+                    entries.push(
+                        <Entry 
+                            key={entry.id} 
+                            entryKey={entry.id} 
+                            edit={props.edit} 
+                            delete={props.delete} 
+                            section={props.section} 
+                            org={entry.org} 
+                            title={entry.title} 
+                            date={formatDates(entry.startDate, entry.endDate)} 
+                            orgLabel={props.orgLabel}
+                        />
+                    )
+
+                } else {
+
+                    entries.push(
+                        <DisplayEntry 
+                            key={entry.id} 
+                            entryKey={entry.id} 
+                            org={entry.org} 
+                            title={entry.title}
+                            details={entry.details} 
+                            date={formatDates(entry.startDate, entry.endDate)} 
+                        />
+                    )
+
+                }
+
             }
 
         }
@@ -46,10 +64,11 @@ export function Box(props) {
     }
     
     return (
-        <div key={Date.now()} className="box">
+        <div key={Date.now()} className={props.type+'-box'}>
             {entries}
         </div>
     )
+
 }
 
 function Entry(props) {
@@ -62,6 +81,19 @@ function Entry(props) {
                 <span className="material-icons" onClick={() => props.edit(props.entryKey, props.section, props.orgLabel)}>edit</span>
                 <span className="material-icons" onClick={() => props.delete(props.entryKey)}>delete</span>
             </div>
+        </div>
+    )
+}
+
+function DisplayEntry(props) {
+    return (
+        <div className="display-entry flex flex-col">
+            <h4>{props.title}</h4>
+            <div className="flex flex-row flex-jc-sb">
+                <i>{props.org}</i>
+                <i>{props.date}</i>
+            </div>
+            {props.details !== '' && props.details.split('\n').map(line => <li key={props.entryKey}>{line}</li>)}
         </div>
     )
 }

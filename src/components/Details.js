@@ -19,6 +19,12 @@ function Details(props) {
     const [endDate, setEndDate] = useState('');
     const [details, setDetails] = useState('');
 
+    const [current, setCurrent] = useState(false);
+
+    function onCheck() {
+        current ? setCurrent(false) : setCurrent(true);
+    }
+
     function showForm(heading, orgLabel) {
 
         setformLabels({
@@ -38,6 +44,7 @@ function Details(props) {
         setTitle('');
         setStartDate('');
         setEndDate('');
+        setCurrent(false);
         setDetails('');
 
         props.toggleHidden();
@@ -78,6 +85,11 @@ function Details(props) {
         setTitle(entry.title);
         setStartDate(entry.startDate);
         setEndDate(entry.endDate);
+
+        if (entry.endDate === 'Current') {
+            setCurrent(true);
+        }
+
         setDetails(entry.details);
 
         showForm(section,orgLabel);
@@ -137,6 +149,8 @@ function Details(props) {
                     startDate={startDate}
                     endDate={endDate}
                     details={details}
+                    current={current}
+                    onCheck={onCheck}
                 />
             }
             <Heading text="Make-a-CV"/>

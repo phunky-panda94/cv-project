@@ -5,7 +5,7 @@ export function InputField(props) {
                 <span>{props.label}</span>
                 <input type={props.type} name={props.label} onChange={props.change} value={props.value} required={props.required} disabled={props.disabled}></input>
                 {props.label === 'End Date' &&
-                    <CheckBox text="Current" onCheck={props.onCheck}/>
+                    <CheckBox text="Current" onCheck={props.onCheck} checked={props.disabled}/>
                 }
             </label>
         </div>
@@ -17,7 +17,7 @@ export function CheckBox(props) {
         <div> 
             <label htmlFor={props.text}>
                 <span></span>
-                <input type="checkbox" name={props.text} onChange={props.onCheck}></input>
+                <input type="checkbox" name={props.text} onChange={props.onCheck} checked={props.checked}></input>
                 <span>{props.text}</span>
             </label>
         </div>

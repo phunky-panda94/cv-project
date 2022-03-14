@@ -114,7 +114,7 @@
 }
 
 .input {
-    height: 10%;
+    min-height: 10%;
     width: 90%;
 }
 
